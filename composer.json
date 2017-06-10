@@ -1,0 +1,32 @@
+{
+  "name": "tfrommen/progress-bars",
+  "description": "This plugin registers a configurable shortcode to render HTML5 <progress> elements.",
+  "type": "wordpress-plugin",
+  "keywords": [
+    "progress",
+    "progressbar",
+    "wordpress",
+    "wp"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Thorsten Frommen",
+      "email": "info@tfrommen.de",
+      "homepage": "https://twitter.com/thorstenfrommen",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/tfrommen/progress-bars/issues",
+    "source": "https://github.com/tfrommen/progress-bars"
+  },
+  "require": {
+    "php": ">=5.4"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
