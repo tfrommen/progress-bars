@@ -5,7 +5,7 @@
  * Description: This plugin registers a configurable shortcode to render HTML5 <code>&lt;progress&gt;</code> elements.
  * Author:      Thorsten Frommen
  * Author URI:  https://tfrommen.de
- * Version:     1.0.0
+ * Version:     1.0.1
  * License:     MIT
  */
 
