@@ -14,24 +14,6 @@ namespace tfrommen\ProgressBars;
 defined( 'ABSPATH' ) or die;
 
 /**
- * Default shortcode tag.
- *
- * @since 1.0.0
- *
- * @var string
- */
-const DEFAULT_SHORTCODE_TAG = 'progress';
-
-/**
- * Shortcode tag filter hook name.
- *
- * @since 1.0.0
- *
- * @var string
- */
-const FILTER_SHORTCODE_TAG = 'progress_bars.shortcode_tag';
-
-/**
  * Bootstraps the plugin.
  *
  * @since   1.0.0
@@ -42,42 +24,11 @@ const FILTER_SHORTCODE_TAG = 'progress_bars.shortcode_tag';
 function bootstrap() {
 
 	/**
-	 * Filters the shortcode tag.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $tag The shortcode tag.
+	 * File with shortcode class.
 	 */
-	$tag = trim( apply_filters( FILTER_SHORTCODE_TAG, DEFAULT_SHORTCODE_TAG ) );
-	if ( '' !== $tag ) {
-		add_shortcode( $tag, function ( $atts = [], $content = '' ) use ( $tag ) {
+	require_once __DIR__ . '/src/Shortcode.php';
 
-			$atts = shortcode_atts( [
-				'class' => '',
-				'id'    => '',
-				'max'   => '100',
-				'value' => '42',
-			], (array) $atts, $tag );
-			$atts = array_filter( $atts, function ( $value ) {
-
-				return '' !== trim( $value );
-			} );
-
-			$attributes = '';
-
-			foreach ( $atts as $name => $value ) {
-				$attributes .= ' ' . esc_attr( $name ) . '="' . esc_attr( $value ) . '"';
-			}
-
-			$content = trim( $content );
-
-			return sprintf(
-				'<progress%2$s></progress>%1$s',
-				$content ? '<span class="progress-bar-label">' . esc_html( $content ) . '</span>' : '',
-				$attributes
-			);
-		} );
-	}
+	( new Shortcode() )->register();
 }
 
 add_action( 'plugins_loaded', __NAMESPACE__ . '\\bootstrap' );
