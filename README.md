@@ -17,7 +17,7 @@ $ composer require tfrommen/progress-bars
 
 Or:
 
-1. [Download ZIP](https://github.com/tfrommen/progress-bars/archive/master.zip).
+1. [Download ZIP](https://github.com/tfrommen/progress-bars/releases).
 1. Upload contents to the `/wp-content/plugins/` directory on your web server.
 1. Activate the plugin through the _Plugins_ menu in WordPress.
 1. Make use of the new `[progress]` shortcode anywhere in your WordPress editor.
@@ -31,6 +31,31 @@ This plugin **requires PHP 5.4** or higher, but you really **should be using PHP
 The following sections will help you get started with Progress Bars.
 To be honest, it's no big deal, though.
 
+### Filters
+
+In order to customize certain aspects of the plugin, it provides you with several filters.
+For each of these, a short description as well as a code example on how to alter the default behavior is given below.
+Just put the according code snippet in your theme's `functions.php` file or your _customization_ plugin, or to some other appropriate place.
+
+#### `\tfrommen\ProgressBars\Shortcode::FILTER_TAG` (`progress_bars.shortcode_tag`)
+
+This filter lets you customize the shortcode tag, which by default is `progress`.
+
+**Usage Example:**
+
+```php
+<?php
+/**
+ * Filters the shortcode tag.
+ *
+ * @param string $tag The shortcode tag.
+ */
+add_filter( \tfrommen\ProgressBars\Shortcode::FILTER_TAG, function () {
+
+	return 'progressbar';
+} );
+```
+
 ### Shortcode
 
 The plugin registers a new configurable shortcode, `[progress]`, that you can use to render [HTML5 `<progress>` elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/progress).
@@ -39,9 +64,8 @@ Below you can find all of the available attributes, each with a short descriptio
 #### `class`
 
 The `class` shortcode attribute represents the according HTML attribute of the `<progress>` element.
-If you provide an empty string (or a string of only whitespace characters), the `class` HTML attribute will not be rendered.
 
-The default value is an empty string, which means the HTML attribute will not be included in the generated markup.
+The default value is an empty string, however, the rendered progress bar will always have the HTML class `progress-bar`.
 
 **Usage Example:**
 
@@ -52,7 +76,7 @@ The default value is an empty string, which means the HTML attribute will not be
 The above shortcode results in the following HTML:
 
 ```html
-<progress class="my-awesome-progress-bar" ...></progress>
+<progress class="progress-bar my-awesome-progress-bar" ...></progress>
 ```
 
 #### `id`
@@ -118,29 +142,21 @@ The above shortcode results in the following HTML:
 
 You now have a progress bar showing a progress (value) of 0, so no progress at all.
 
-### Filters
+#### Content
 
-In order to customize certain aspects of the plugin, it provides you with several filters.
-For each of these, a short description as well as a code example on how to alter the default behavior is given below.
-Just put the according code snippet in your theme's `functions.php` file or your _customization_ plugin, or to some other appropriate place.
-
-#### `\tfrommen\ProgressBars\FILTER_SHORTCODE_TAG` (`progress_bars.shortcode_tag`)
-
-This filter lets you customize the shortcode tag, which by default is `progress`.
+The shortcode can either be used as self-closing one, or as enclosing shortcode around some custom content.
+Any provided content will be wrapped in a `<span>` element, and appended to the progress bar markup.
 
 **Usage Example:**
 
-```php
-<?php
-/**
- * Filters the shortcode tag.
- *
- * @param string $tag The shortcode tag.
- */
-add_filter( \tfrommen\ProgressBars\FILTER_SHORTCODE_TAG, function () {
+```
+[progress max="12" value="5"]May[/progress]
+```
 
-	return 'progressbar';
-} );
+The above shortcode results in the following HTML:
+
+```html
+<progress max="12" value="5" ...></progress><span class="progress-bar-label">May</span>
 ```
 
 ## License
