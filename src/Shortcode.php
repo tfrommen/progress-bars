@@ -20,6 +20,11 @@ class Shortcode {
 	const FILTER_TAG = 'progress_bars.shortcode_tag';
 
 	/**
+	 * @var string
+	 */
+	private $tag;
+
+	/**
 	 * Constructor. Sets up the properties.
 	 *
 	 * @since 1.0.0
